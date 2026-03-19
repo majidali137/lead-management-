@@ -6,7 +6,7 @@ const API = axios.create({
 
 export const getLeads = async () => {
   const res = await API.get("/leads");
-  return res.data.data; // 👈 direct array return
+  return res.data.data; 
 };
 
 export const createLead = async (data: {
