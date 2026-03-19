@@ -7,16 +7,25 @@ require('dotenv').config();
 const connectDB = require('./config/database');
 const leadRoutes = require('./routes/leadRoutes');
 
+// Connect to MongoDB
 connectDB();
 
 const app = express();
 
-// Middleware
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
+// CORS middleware
 app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -24,15 +33,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/leads', leadRoutes);
 
 app.use((req, res) => {
+    console.log(`404 - Route not found: ${req.method} ${req.originalUrl}`);
     res.status(404).json({
-        success: false,
-        message: 'Route not found'
+        message: `Cannot ${req.method} ${req.originalUrl}`,
+        error: 'Not Found',
+        statusCode: 404
     });
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error('Error stack:', err.stack);
     res.status(500).json({
         success: false,
         message: 'Something went wrong!',
@@ -44,5 +54,7 @@ const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-    console.log(`API URL: http://localhost:${PORT}/api/leads`);
+    console.log(`Test URL: http://localhost:${PORT}/test`);
+    console.log(`API Test URL: http://localhost:${PORT}/api/test`);
+    console.log(`Leads URL: http://localhost:${PORT}/api/leads`);
 });

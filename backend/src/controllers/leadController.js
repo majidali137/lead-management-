@@ -20,8 +20,20 @@ const getLeads = async (req, res) => {
 
 // @route   POST /api/leads
 const createLead = async (req, res) => {
+    console.log('Request body:', req.body);
+    
     try {
         const { name, email, status } = req.body;
+
+        // Validation
+        if (!name || !email) {
+            return res.status(400).json({
+                success: false,
+                message: 'Name and email are required'
+            });
+        }
+
+        // Check if lead already exists
         const existingLead = await Lead.findOne({ email });
         if (existingLead) {
             return res.status(400).json({
@@ -35,6 +47,7 @@ const createLead = async (req, res) => {
             email,
             status: status || 'New'
         });
+
 
         res.status(201).json({
             success: true,
