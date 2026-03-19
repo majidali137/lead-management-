@@ -4,73 +4,70 @@ A simple full-stack project using:
 Node.js + Express + MongoDB (Backend)
 Next.js + TypeScript + Tailwind (Frontend)
 
----
-
 # 📁 Project Structure
 
 lead-management-system/
 ├── backend/
 └── frontend/
 
----
+# ⚙️ HOW TO RUN PROJECT
 
-# ⚙️ HOW TO RUN PROJECT (STEP BY STEP)
+## 1️⃣ BACKEND
 
----
-
-## 1️⃣ START BACKEND
-
-### 📌 Step 1: Open backend folder
 cd backend
 
-### 📌 Step 2: Install dependencies
+```bash
 npm install
+```
 
-### 📌 Step 3: Create .env file
+Create .env file:
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 
-### 📌 Step 4: Run backend server
-npm run dev
+Run backend:
 
-👉 Backend will run on:
+```bash
+npm run dev
+```
+
+Backend runs on:
 http://localhost:8000
 
 ---
 
-## 2️⃣ START FRONTEND
+## 2️⃣ FRONTEND
 
-### 📌 Step 1: Open frontend folder
 cd frontend
 
-### 📌 Step 2: Install dependencies
+```bash
 npm install
+```
 
-### 📌 Step 3: Create .env.local file
+Create .env.local file:
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
 
-### 📌 Step 4: Run frontend
-npm run dev
+Run frontend:
 
-👉 Frontend will run on:
+```bash
+npm run dev
+```
+
+Frontend runs on:
 http://localhost:3000
 
 ---
 
 # 📡 API ENDPOINTS
 
-## ➕ Create Lead
 POST /api/leads
-
-## 📄 Get All Leads
 GET /api/leads
 
 ---
 
-# 📊 DATABASE (MongoDB Schema)
+# 📊 DATABASE FIELDS
 
-- name (string, required)
-- email (string, required, unique)
+- name (string)
+- email (string, unique)
 - status (New | Engaged | Proposal Sent | Closed-Won | Closed-Lost)
 - createdAt (timestamp)
 
@@ -78,28 +75,24 @@ GET /api/leads
 
 # ✨ FEATURES
 
-- Add new leads
-- View all leads
-- Clean UI dashboard
-- Real-time updates
-- Full-stack API integration
+- Add leads
+- View leads
+- Full API integration
 - MongoDB database
 
 ---
 
 # 🧠 TECH STACK
 
-## Backend
+Backend:
+
 - Node.js
-- Express.js
+- Express
 - MongoDB
 - Mongoose
-- dotenv
-- CORS
 
-## Frontend
-- Next.js (App Router)
+Frontend:
+
+- Next.js
 - TypeScript
 - Tailwind CSS
-- Axios
-
